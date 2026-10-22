@@ -18,16 +18,19 @@ label is not graded.
 [Your GitHub username, exactly as it appears on your profile — no `@`, no profile URL. Your
 comments upstream are identified by this name.]
 
+Cole-House
+
 ---
 
 ## Posted upstream
 
 **Claim comment**
 
-[Link to the comment where you claimed the issue. Use the comment's own permalink, not the
+https://github.com/codepath/pathreview-ai301-fa26-s3/issues/11#issuecomment-6335601996[Link to the comment where you claimed the issue. Use the comment's own permalink, not the
 issue page on its own. **Then paste the text of that comment underneath the link** — the
 pasted text is what this field is graded on, so copy across what you actually posted.]
 
+I'd like to pick up this documentation issue. My plan is to look at the current `ARCHITECTURE.md` to see exactly what's missing, then find where the hybrid retrieval scoring formula and default weights are actually defined in the codebase, and add a section to the doc that explains the formula with a concrete example (and a diagram, if it helps make the weighting clear).
 **Reproduction comment**
 
 [Link to the comment where you posted your reproduction. It must record the environment
