@@ -15,15 +15,11 @@ label is not graded.
 
 **Pull request**
 
-[Link to the pull request you opened. It must be the pull request's own page on the Path
-Review repo, not your fork's branch page.]
+[Link to the pull request](https://github.com/Cole-House/pathreview-ai301-fa26-s3/pull/1)
 
 **Branch**
 
-[The name of the branch the pull request comes from, exactly as it appears in your fork.
-The naming shape is a type prefix, then the issue number, then a short description. **The
-issue number in the branch name must be the number of the issue the pull request fixes** —
-a name carrying any other number does not satisfy this field.]
+[docs/11-hybrid-scoring-docs]
 
 ## Eval iterations
 
@@ -32,28 +28,20 @@ fields.
 
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+19/20
+20/20
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+I couldn't find the results of my first run where it missed a clear-accept but I think it was package-13 where it failed a clear accept where it didn't catch the PR's disclosures.
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/pr-precheck/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+When going through the assignment the honest-outcome rule kind of confused me because of the gray area of a pr still passing if things may be missing but the author disclosed the situation. I wrote a preferred check for this "Every shortfall (untested path, skipped plan step, known bug) is disclosed in the description; a disclosed shortfall does not fail another check on its own". I worded it this way to uphold the honest-outcome rule for pr's with honest disclosure about deviations or things that came up during testing.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+When wording the procedure.md file it was important to have the rubric.md and evidence-guide.md files solid so I could leave accurate instructions in the procedure.
 
 ---
 
