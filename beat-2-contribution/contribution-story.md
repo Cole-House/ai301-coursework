@@ -8,9 +8,8 @@ format criteria grade exactly that. Your course repo link is the whole submissio
 files and no evidence uploads are part of Assignment 5.
 
 **Contribution Number:** [1]
-**Student:** [Student name]
-**GitHub Username:** [your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comments upstream are identified by this name.]
+**Student:** [Cole House]
+**GitHub Username:** [Cole-House]
 **Issue:** [GitHub issue link]
 **Pull Request:** [GitHub PR link, once opened]
 
@@ -55,10 +54,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Enhancing our issue-select skill to issue-scout ot explore live repos**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+In this unit we upgraded our issue-select skill to issue-scout where we used the same rubric checks from week 1 that determine if an issue is a good-first issue for us based on various factors including if the maintainer is active on the repo, scoped for newcomer, available to work on and if repo allows ai use. We added a scouting layer to the skill where we use "gh search issues" commands to search on github for live issues that match our given queries that help find issues that fit our profile, and from the issues found we also filter it to rank the top 5 found. I felt like the ranking step was important because we tell them what results to drop and how to find the top 5 issues to then be ran through an actual evaluation and get graded. Through my grading process we were able to fix the ranking a bit to not allow issues that are related to issues I didn't want to work on through to the grading process.
 
 **Unit 6: [one line on the tool work]**
 
