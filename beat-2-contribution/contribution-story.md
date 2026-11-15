@@ -58,11 +58,9 @@ one in the week it belongs to.
 
 In this unit we upgraded our issue-select skill to issue-scout where we used the same rubric checks from week 1 that determine if an issue is a good-first issue for us based on various factors including if the maintainer is active on the repo, scoped for newcomer, available to work on and if repo allows ai use. We added a scouting layer to the skill where we use "gh search issues" commands to search on github for live issues that match our given queries that help find issues that fit our profile, and from the issues found we also filter it to rank the top 5 found. I felt like the ranking step was important because we tell them what results to drop and how to find the top 5 issues to then be ran through an actual evaluation and get graded. Through my grading process we were able to fix the ranking a bit to not allow issues that are related to issues I didn't want to work on through to the grading process.
 
-**Unit 6: [one line on the tool work]**
+**Unit 6: Setting up voice-guide for claiming issue and getting lay of the land**
 
-[2-4 sentences: the voice-guard, the repo-memory file. What broke or
-fell short, and what changed because of it. "Nothing broke" counts when
-it is true - say how you know.]
+I felt that this unit we learned how to use hooks to help avoid uneccesary and costly commands being run by checking that our comment adheres to the rules we set for how we want our voice to be heard in repo's. It was interesting learning about how different open source repos operate and the process they use for contributor's, I gravitated towards a smaller project that doesn't require onboarding paperwork and utilizes automation in the process so as a contributor I can claim issues that are up for grabs and get working right away. I cloned my repo and enjoyed learning how to set-up my CLAUDE.local.md file (with under 60 lines) using claude itself to explore the important subsystem around the issue I am working on and distill the conventions of contributing into a file that will get loaded into every claude session so it has the key context when working on the PR.
 
 **Unit 7: [one line on the tool work]**
 
