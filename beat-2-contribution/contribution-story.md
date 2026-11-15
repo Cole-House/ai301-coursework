@@ -1,4 +1,4 @@
-# Contribution: [Issue Title]
+# Contribution: Standardize loading skeleton heights across dashboard widgets
 
 Path: `beat-2-contribution/contribution-story.md`
 
@@ -10,7 +10,7 @@ files and no evidence uploads are part of Assignment 5.
 **Contribution Number:** [1]
 **Student:** [Cole House]
 **GitHub Username:** [Cole-House]
-**Issue:** [GitHub issue link]
+**Issue:** [[GitHub issue link]](https://github.com/Priyanshu-byte-coder/devtrack/issues/44)
 **Pull Request:** [GitHub PR link, once opened]
 
 One repository, built across units 5 to 8, telling the whole story of your real
@@ -78,16 +78,7 @@ drafted, what you did with the draft.]
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs in your own words: how you searched, what your scan
-surfaced, what your scout's verdict said, why this issue fits your
-profile, and what you hope to learn. If your scout's verdict on it
-was reject and you chose it anyway, say so here and say why; choosing
-against your own tool silently is what loses points. Close with an
-honest read of the tool itself: where the scout fell short on a real
-wild search and what you changed or would change, or what convinced
-you it held up. **Record the link to your claim comment in this section too.**
-Not claimed yet? Write `claim pending` and today's date where the link goes,
-and add the link the moment your claim lands.]
+I chose issue#44 Standardize loading skeleton heights across dashboard widgets in the open source devtrack repo which is a repo building a dashboard for developers to see streaks and their place on a global ranking system. This was not found through the codepath issue site or the issue-scout but rather through asking claude to suggest me a repo that satisfied my checks and profile especially one that was active, and I could get working right away to get a PR merged before the end of the course lol. My issue-scout runs were sort of helpful but needed tweaking because it would still rank issues that weren't that interesting to me in my top 5 and while looking through issues on the codepath site I would add the filters for good first issue and up for grabs but the issues I would find would have PRs already open and was unclear if it was truly up for grabs. I went with devtrack repo because the contributing process was straightforward, maintainer was active, the issue touched on the front-end UI experience I was looking to gain and I was able to claim the issue successfully.
 
 **Toolkit**
 
