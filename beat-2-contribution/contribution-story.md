@@ -118,32 +118,69 @@ I chose issue#44 Standardize loading skeleton heights across dashboard widgets i
 ## Reproduction Process
 
 **Environment Setup**
+I'm reproducing this on a fork of Priyanshu-byte-coder/devtrack at main @ 2a5c5161, macOS 26.5.2, Node v22.23.5 / pnpm 11.13.1. I used Chrome with a 1440 x 900 viewport, signed in with GitHub. My account has sparse data (2 goals, few PRs), so the loaded heights below are close to a floor.
 
-[What a stranger would need to stand this up: your operating system,
-the relevant versions (language, runtime, package manager, the project
-itself), and how you set the project up. Then the challenges you faced
-and how you solved them, or that none came up.]
+Fork and clone the repo, then follow the Quick Start in the README and the Development Guide (`DEVELOPMENT.md`) to install dependencies, create a GitHub OAuth App, set up Supabase (including loading the SQL schema), and fill in `.env.local` with necessary values.
 
 **Steps to Reproduce**
+1. `pnpm install`, `pnpm dev`, open http://localhost:3000, sign in with GitHub.
+2. DevTools → Network → add Slow 4G throttling with devtools to allow time to measure skeleton dimensions and then loaded state.
+3. In the Console, log layout shifts:
+   `new PerformanceObserver(l => l.getEntries().forEach(e => !e.hadRecentInput && console.log('layout-shift', e.value.toFixed(4), Math.round(e.startTime) + 'ms'))).observe({type:'layout-shift', buffered:true});`
+4. Hard-reload each page: `/dashboard/goals` (GoalTracker), `/dashboard/activity` (StreakTracker), `/dashboard/pull-requests` (PRMetrics).
+5. While the skeleton shows, measure each card's own root, then measure again after the data loads (selectors below).
+6. Per-section heights are the children of each card root.
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+<details><summary>Measuring snippet</summary>
+
+```js
+console.table(Object.entries({
+  'Goal Tracker': ['[aria-labelledby="goal-tracker-title"] > .px-frame'],
+  'Streak Tracker': ['[data-testid="streak-widget"]', '[aria-labelledby="streak-tracker-title"] > div'],
+  'PR Metrics': ['[aria-labelledby="pr-metrics-title"] > .px-frame']
+}).map(([widget, sels]) => { const el = sels.map(s => document.querySelector(s)).find(Boolean); return { widget, px: el ? Math.round(el.getBoundingClientRect().height) : 'not on this page' }; }));
+```
+</details>
+
+**Setup gotcha:** I left the `your_upstash_redis_rest_url` placeholders from `.env.example` in place, and every `/api/metrics/*` call returned 502 ("GitHub API error") and `/api/user/settings` returned 500 until I commented them out. 
 
 **Reproduction Evidence**
 
-- **Commit showing reproduction:** [link to commit in your fork]
-- **Screenshots/logs:** [if applicable]
-- **My findings:** [what you discovered during reproduction; an
-  honest, evidenced cannot-reproduce that led you to re-pick or ask
-  the maintainer belongs here and costs you nothing]
+- **Commit showing reproduction:** N/A
+- **Screenshots/logs:**
+<img width="809" height="446" alt="Screenshot 2026-11-17 at 11 15 43 AM" src="https://github.com/user-attachments/assets/8d05743e-01a2-4df7-866f-18e886761478" />
+<img width="814" height="567" alt="Screenshot 2026-11-17 at 1 03 33 PM" src="https://github.com/user-attachments/assets/cf668663-29bc-4306-87b2-9ab844c9b10f" />
+<img width="803" height="537" alt="Screenshot 2026-11-17 at 12 52 53 PM" src="https://github.com/user-attachments/assets/a7eee42d-38b3-4f26-80c8-dcdd9e53a685" />
+<img width="792" height="563" alt="Screenshot 2026-11-17 at 11 30 50 AM" src="https://github.com/user-attachments/assets/7813ad4b-609d-43a1-9356-162a7be2fc67" />
+<img width="791" height="561" alt="Screenshot 2026-11-17 at 11 29 41 AM" src="https://github.com/user-attachments/assets/38838db0-d73b-4c4b-a907-7b9970040d3c" />
+<img width="801" height="517" alt="Screenshot 2026-11-17 at 11 16 22 AM" src="https://github.com/user-attachments/assets/8ee0c59b-b9f5-482d-b538-b9b4eb71a3fd" />
+
+
+- **My findings:** 
+ Widget | Skeleton | Loaded |
+|---|---|---|
+| GoalTracker | 232 px | 686 px (0 goals), 966 px (2 goals) |
+| StreakTracker | 700 px | 980 px |
+| PRMetrics | 648 px | 750 px |
+
+**GoalTracker.** The skeleton is a 24 px header and three 32 px rows. The loaded card is 35 px header, 26 px category chips, goals list (about 132 px per goal), 16 px "Updated" line, a 440 px create-goal form, and a 37 px bottom row. The skeleton reserves nothing for the form, which is most of the gap.
+
+**StreakTracker.** The skeleton's content is only about 328 px (title plus a 2x2 grid of `h-28`), so its 700 px comes from `min-h-[700px]`. Loaded sections: header 32, stats grid 189, month strip 38, "Updated" 16, freeze row 50, calendar 531. The skeleton has no placeholder for the strips or the calendar. Note: measuring the `role="region"` wrapper on /dashboard/activity gives 1164 → 1404 px, because the grid row appears to stretch to the sibling column (Weekly Summary / Consistency Score). The numbers above are the card roots.
+
+**PRMetrics.** There are two skeleton stages. The first is a 320 px generic fallback with no header, from the dynamic import in `widgets.tsx`. The second is PRMetrics' own skeleton at 648 px. Body sections, skeleton vs loaded: stat tiles 92 vs 104, weekly chart 192 vs 236, panel row 224 vs 127, and a second panel row (127) that the skeleton doesn't have.
+
+**Layout shifts** (page-wide, so they include other widgets on the page):
+- /dashboard/goals: 0.0629, 0.0434, 0.0617 (sum ≈ 0.168)
+- /dashboard/activity: 0.0323, 0.0162, 0.0050, 0.0430, 0.0262 (sum ≈ 0.123)
+- /dashboard/pull-requests: 0.0701, 0.0620, 0.0235 (sum ≈ 0.156)
+Each logged value is the browser's layout-shift score (the fraction of the viewport that moved times the distance it moved), so higher means a bigger visible jump. With Slow 4G throttle, each page logged 3 to 5 shifts as data replaced the skeletons (summed per page: about 0.17 on /dashboard/goals, 0.12 on /dashboard/activity, 0.16 on /dashboard/pull-requests).
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: repro-check
+- What it produced: accepted my repro comment
+- Difficulties: Setting up the environment and debugging
+- What changed: NA
 
 ---
 
