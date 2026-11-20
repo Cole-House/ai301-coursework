@@ -67,6 +67,8 @@ I felt that this unit we learned how to use hooks to help avoid uneccesary and c
 [2-4 sentences: the ship-gate and your gate manifest. What it produced
 on your real branch, what fought you, what changed because of it.]
 
+This was a fun and really important unit because the ship-gate and the pr-precheck hooks working in tandem were very clutch in catching obvious contradictions in my pr and the actual code diffs, plans and test-evidence. Ship-gate was the first layer with the mandatory checks that any PR needs to pass for the repo and then once it passes that then pr-precheck dives deeper and analyzes the diff, plan, PR draft, and test evidence, and scores them against my rubric. I had to go back and fix so many things at one point I just wanted to ignore what it was saying lol but I'm glad I pulled through and have my first open-source PR opened!
+
 **Unit 8: [one line on the tool work]**
 
 [2-4 sentences: the PR-monitor and your playbook. What it read, what it
@@ -293,13 +295,23 @@ All three loading skeletons are now sized to match their loaded cards, so a card
 - GoalTracker.tsx: the three repeated goal rows (about 150px total) are replaced by a layout that mirrors the loaded card: header pills, one goal block, a 440px list area and a footer.
 - PRMetrics.tsx: resized the six stat tiles (104px) and the chart (236px), and the two large panels became two rows of two 127px panels.
 
-**[Date]**
+**11/19/26**
 
-[Entry]
+Ran my ship-gate hook on my pr_draft that filled out the given template and got back, fails for all my pr-precheck checks:
+- Silent drift [fail]: Diff stat lists 38 files (workflow deletion, Next bump, DiffTrendChart, personality route, widgets.tsx) vs. plan scope of 3 component files; likely stale local main (about 15 upstream commits in main..HEAD), but unverifiable from the package
+  - Not tested [fail]: Plan requires before/after layout-shift totals and heights; test_evidence.md gives only after heights, and GoalTracker is 818 vs 1058 px loaded
+  - Unreviewable [fail]: Six 'Screenshot 2026-11-19 ... .png' files committed at repo root, plus unrelated upstream hunks in the diff
+  - Standards wall [fail]: Commit 'added before/after screenshots to my pr_draft.md file' is not Conventional Commits; draft title 'Fix/44 dashboard standardized skeletons'; mobile box checked though measured only at 1440x900
+  - Honest outcome [fail]: Description omits the GoalTracker 818 vs 1058 gap, the 1440px-only measurement, and the deferred 320px lazy fallback deviation
 
+**How I fixed all these issues**
+- To fix the silent drift I needed to update my local main to catch upstream changes, so only my branch's changes will be present in the PR
+- I will fix the unreviewable and standards wall check by attaching the 6 screenshots to the PR instead of on Github and squash my commit to a single clean atomic commit
+- Need to address the lack of before and after evidence, ommitting the layout shifts and focusing on the dimensions matching and noting why the discrepancy makes sense.
+- fixed mismatches in claims and the code diffs. plan stated only h elements would be changed but claude decided to delete a class from an element, which I had to fix and fold back into the commit
 **Toolkit**
 
-- Tool:
+- Tool: ship-gate, pr-precheck
 - What it produced:
 - Difficulties:
 - What changed:
@@ -308,20 +320,22 @@ All three loading skeletons are now sized to match their loaded cards, so a card
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when opened]
+**PR Link:** [[GitHub PR URL when opened](https://github.com/Priyanshu-byte-coder/devtrack/pull/3649/changes)]
 
-**PR Description:** [what the PR says; much of the content above
-adapts into it]
+**PR Description:** The loading skeletons in StreakTracker, GoalTracker, and PRMetrics were sized differently from the cards they stand in for, so each card jumped when data loaded. This resizes each skeleton to approximate its loaded layout. Skeleton markup only, no functional changes.
 
 **Maintainer Feedback:**
-
 - [Date]: [feedback received, or "none yet"; silence is a normal
   state and costs you nothing]
 - [Date]: [how you addressed it]
+  
+None yet
 
 **Status:** [Awaiting review / Iterating / Merged / Closed. The
 status is a fact you record, never a grade: the PR is graded as
 opened.]
+
+Awaiting Review
 
 **Toolkit**
 
