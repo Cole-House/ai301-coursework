@@ -11,7 +11,7 @@ files and no evidence uploads are part of Assignment 5.
 **Student:** [Cole House]
 **GitHub Username:** [Cole-House]
 **Issue:** [[GitHub issue link]](https://github.com/Priyanshu-byte-coder/devtrack/issues/44)
-**Pull Request:** [GitHub PR link, once opened]
+**Pull Request:** [[GitHub PR link, once opened]](https://github.com/Priyanshu-byte-coder/devtrack/pull/3649)
 
 One repository, built across units 5 to 8, telling the whole story of your real
 contribution. Fill it as you work, not at the end — the sections below ask for evidence that
@@ -62,17 +62,13 @@ In this unit we upgraded our issue-select skill to issue-scout where we used the
 
 I felt that this unit we learned how to use hooks to help avoid uneccesary and costly commands being run by checking that our comment adheres to the rules we set for how we want our voice to be heard in repo's. It was interesting learning about how different open source repos operate and the process they use for contributor's, I gravitated towards a smaller project that doesn't require onboarding paperwork and utilizes automation in the process so as a contributor I can claim issues that are up for grabs and get working right away. I cloned my repo and enjoyed learning how to set-up my CLAUDE.local.md file (with under 60 lines) using claude itself to explore the important subsystem around the issue I am working on and distill the conventions of contributing into a file that will get loaded into every claude session so it has the key context when working on the PR.
 
-**Unit 7: [one line on the tool work]**
-
-[2-4 sentences: the ship-gate and your gate manifest. What it produced
-on your real branch, what fought you, what changed because of it.]
+**Unit 7: Ship-gate is the hook to make sure PRs are ready for the sea**
 
 This was a fun and really important unit because the ship-gate and the pr-precheck hooks working in tandem were very clutch in catching obvious contradictions in my pr and the actual code diffs, plans and test-evidence. Ship-gate was the first layer with the mandatory checks that any PR needs to pass for the repo and then once it passes that then pr-precheck dives deeper and analyzes the diff, plan, PR draft, and test evidence, and scores them against my rubric. I had to go back and fix so many things at one point I just wanted to ignore what it was saying lol but I'm glad I pulled through and have my first open-source PR opened!
 
-**Unit 8: [one line on the tool work]**
+**Unit 8: Keeping the PR Alive**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+I opted to skip this tool because I didn't have time to finish it and the PR I opened was reviewed and merged overnight. I do see the use of this skill if I were getting more into contributing to more open source projects and need to keep tabs on multiple open PRs.
 
 ---
 
@@ -84,9 +80,9 @@ I chose issue#44 Standardize loading skeleton heights across dashboard widgets i
 
 - Tool: issue-scout (your scout: your search strategy, your rubric),
   and how you used it
-- What it produced: [the scan and its verdict on this issue, described]
-- Difficulties: [where it fell short, or "none met" if none did]
-- What changed: [what you patched or would update, or "nothing"]
+- What it produced: it found me top 5 issues for me to work on based off filtering and profile
+- Difficulties: filtering had to be fixed because it ranked an issue dealing with operating system in top 5 when explicitly told to avoid those issues
+- What changed: filtering and emphasized issues that were recent to avoid ones that were claimed already.
 
 ---
 
@@ -94,26 +90,26 @@ I chose issue#44 Standardize loading skeleton heights across dashboard widgets i
 
 **Problem Description**
 
-[In your own words, what is broken or missing?]
+The StreakTracker, GoalTracker and PRMetrics skeletons were not matching the dimensions of when data loads into the widgets. This was causing the dashboard to feel janky upon loading with elements shifting too much 
 
 **Expected Behavior**
 
-[What should happen?]
+The loading of data should not cause major layout shifts on the page and it should feel seamless
 
 **Current Behavior**
 
-[What actually happens?]
+Skeletons are too small and when data loads in it pushes elements around and the shift is visually jarring.
 
 **Affected Components**
 
-[Which parts of the codebase are involved?]
+The StreakTracker, GoalTracker and PRMetrics components.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: claude code
+- What it produced: It helped me dig through the repo and find thescoped subsystem to work on for the issue 
+- Difficulties: none 
+- What changed: N/A
 
 ---
 
@@ -312,9 +308,9 @@ Ran my ship-gate hook on my pr_draft that filled out the given template and got 
 **Toolkit**
 
 - Tool: ship-gate, pr-precheck
-- What it produced:
-- Difficulties:
-- What changed:
+- What it produced: hooks to check if my branch can pass the mandatory checks for repo and if my pr draft is ready to be posted, cross-checking across a lot of sources
+- Difficulties: Pr-precheck kept failing because of contradictions in statements and the code diffs 
+- What changed: Went in and amended the contradicitons.
 
 ---
 
@@ -325,24 +321,18 @@ Ran my ship-gate hook on my pr_draft that filled out the given template and got 
 **PR Description:** The loading skeletons in StreakTracker, GoalTracker, and PRMetrics were sized differently from the cards they stand in for, so each card jumped when data loaded. This resizes each skeleton to approximate its loaded layout. Skeleton markup only, no functional changes.
 
 **Maintainer Feedback:**
-- [Date]: [feedback received, or "none yet"; silence is a normal
-  state and costs you nothing]
-- [Date]: [how you addressed it]
+- [11/20/26]: Thanks @Cole-House, and thanks for claiming #44 before starting. 🙌 This is good to merge.
+- [11/20/26]: Thank you!
   
-None yet
 
-**Status:** [Awaiting review / Iterating / Merged / Closed. The
-status is a fact you record, never a grade: the PR is graded as
-opened.]
-
-Awaiting Review
+**Status:** MERGED
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: N/A
+- What it produced: N/A
+- Difficulties: N/A
+- What changed: N/A
 
 ---
 
@@ -350,25 +340,28 @@ Awaiting Review
 
 **Technical Skills Gained**
 
-[What you learned technically, named concretely.]
+I learned how claude skills work and how to scaffold all the guiding and reference files to properly manage context and tell the AI where to look with an evidence_guide, the exact steps to follow with the procedure and the judgement checks to make with the rubric. With AI being more prevalent in software engineering we must be extra critical of it's output and using it repos with others we can add a voice-guide to draft messages on our behalf but in our own voice. 
+
+You must follow good contributing etiquette which usually consists of not claiming an issue over someone, reproducing the issue on your own machine, observing behavior and mapping it to code, diagnosing the problem and creating a plan to implement the fix; all with the help of AI to . When making the fix you have to be sure to keep the commit history clean and make sure you follow the plan of action or disclose any deviations so the maintainer has a clear story to follow, limits the back and forth questions and makes your PR easily scannable.   
+
+
+Another big thing I learned was about how real software engineering in the open-source and industry works with first principles thinking and learning to work within the house rules of any repo was a very important skill that I will carry with me. AI was very helpful in helping explore codebases, identify subsystems that are related to the issue and also help form a plan that point to sources of truth across codebase, but we must always remain in the driver seat and do our due diligence to double check AI's output and reasoning. 
+
 
 **Challenges Overcome**
 
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
+I initially was having issues finding an issue to work on that fit my profile and wasn't claimed, my issue-scout was not filtering properly and the issues I would find on the codepath site said they had the up for grabs tag but were already being worked on. Navigating the rules for all the different repos was tricky at first with some requiring claim comments and other jus saying to open a PR. I eventually asked claude  chat to search the web for me with my fit profile and a repo that's active and I could claim and start working on a scoped good first issue right away, which led me to devtrack.
+
+Another challenge I overcame was when I was making the push to open my PR but my PR draft kept getting stopped by my pr-precheck which was a crucial skill to build. It stopped me from opening a PR that had conflicting statements across my pr draft, to my test evidence and even the code diff. The whole process was pretty time-consuming for a minor UI fix but it forced me to really look at the work claude did in the implementation and I found that it changed something when in my plan it was told to only make changes to certain elements.
 
 **What I'd Do Differently Next Time**
 
-[Reflection on your process.]
+Next time I would take more time to actually go back into fix issues I saw with the skills when I wasn't getting the results I wanted like the issue-scout, but due to time I just was focused on getting a PR merged. 
+
+Another thing I would do differently is when going through the process of planning and implementing with claude be more diligent about the actual code diffs that are being made and do my due diligence that everything across the plan, test_evidence, code diffs and pr_draft track.
 
 ---
 
 ## Resources Used
 
-[What actually helped, not a reading list. List things this story
-already shows you using: the doc you followed to set the environment
-up, the thread that explained the bug, the person who answered you.
-One real entry beats ten plausible ones.]
-
-- [Link to documentation that helped]
-- [Discussion, issue, or post that helped]
+The timeline from claiming my issue to reproducing it, implementing the changes, opening my PR and getting it merged was 7 days. In that time I was fully locked in with claude going back and forth between the browser chat to give more context and reason about strategy to getting the exact context using claude code inside the repo. The CONTRIBUTING.MD and DEVELOPMENT.md files were crucial to help get the environment properly set-up and resolving errors along with providing the house rules for my contrubution.
